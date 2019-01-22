@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
+<h3>Average Review: </h3>
+  <%= format_average_stars(@movie) %>
 
 <p>
   <strong>Title:</strong>
@@ -35,4 +37,6 @@
 </p>
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<%= link_to 'Back', movies_path %> |
+
+<%= link_to  "Write Review", new_movie_review_path(@movie) %>
