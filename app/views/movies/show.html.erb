@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @movie.title %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @movie.rating %>
+</p>
+
+<p>
+  <strong>Total gross:</strong>
+  <%= number_to_currency( @movie.total_gross) %>
+</p>
+
+<p>
+  <strong>Date Released:</strong>
+  <%=  time_ago_in_words(@movie.released_on ) %> ago
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= truncate(@movie.description, length: 40, seperator: ' ') %>
+</p>
+
+<p>
+  <strong>Cast: </strong>
+  <%=@movie.cast %>
+</p>
+
+<p>
+  <%= image_for(@movie) %> 
+</p>
+
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
