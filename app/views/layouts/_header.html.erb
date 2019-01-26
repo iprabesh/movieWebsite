@@ -1,3 +1,16 @@
-<header style="padding: 5px; color: #F0F0F0; background: #237CBE;">
-  <h1>Super-Heroic Flix</h1>
+<header>
+  <h1>Movie Review Site</h1>
+  
+ <nav>
+  <p>
+    <% if current_user %>
+      <%= link_to current_user.name, current_user %>
+        <%= link_to "Account Settings", edit_user_path(current_user) %>
+      %= link_to 'Sign Out', session_path, method: :delete, class: 'button' %>
+    <% else %>
+      <%= link_to 'Sign Up', signup_path, class: 'button' %>
+      <%= link_to 'Sign In', new_session_path, class: 'button' %>
+    <% end %>
+  </p>
+</nav>
 </header>

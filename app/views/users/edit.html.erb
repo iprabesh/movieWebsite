@@ -1,0 +1,8 @@
+<h1>Edit Account</h1>
+<strong>Member since: <%= @user.created_at.strftime("%B %Y") %></strong>
+<%= render 'form' %>
+<br>
+<%= link_to  "Delete Account", @user,
+            method: :delete, 
+            data: { confirm: 'Are you sure you want to delete your account?' },
+            class: 'button' %>
