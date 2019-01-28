@@ -6,12 +6,18 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.released
+    @movies = Movie.send(movies_scope)
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
+    
+    @fans = @movie.fans
+    @genres = @movie.genres
+    if current_user
+      @current_favorite = current_user.favorites.find_by(movie_id: @movie.id)
+    end
   end
 
   # GET /movies/new
@@ -27,7 +33,6 @@ class MoviesController < ApplicationController
   # POST /movies.json
   def create
     @movie = Movie.new(movie_params)
-
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
@@ -42,6 +47,7 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+    fail
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
@@ -66,11 +72,19 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.find_by!(slug: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :total_gross, :released_on, :description, :cast, :director, :image_file_name)
+      params.require(:movie).permit(:title, :rating, :total_gross, :released_on, :description, :cast, :slug, :director, :image_file_name,genre_ids:[])
+    end
+
+    def movies_scope
+      if params[:scope].in? %w(hits flops upcoming recent)
+        params[:scope]
+      else
+        :released
+      end
     end
 end

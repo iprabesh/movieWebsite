@@ -26,6 +26,12 @@
     <%= form.text_field :total_gross, id: :movie_total_gross %>
   </div>
 
+  
+  <div class="field">
+    <%= form.label :genre %>
+      <%= form.collection_check_boxes(:genre_ids, Genre.all, :id, :name) %>
+  </div>
+  
    <div class="field">
     <%= form.label :released_on %>
     <%= form.date_field :released_on, id: :movie_released_on %>
@@ -55,7 +61,12 @@
     <%= form.label :description %>
     <%= form.text_field :description, id: :movie_description %>
   </div>
-  
+  <% unless @movie.new_record? %>
+  <li>
+    <%= f.label :slug %>
+    <%= f.text_field :slug, size: 30 %>
+  </li>
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>
