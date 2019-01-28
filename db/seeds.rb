@@ -6,6 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create!([
+  name: "Prabesh Amatya",
+  email: "iprabesh@hotmail.com",
+  password: "passwordpassword",
+  password_confirmation: "passwordpassword", 
+  admin: true
+])
+
 Movie.create!([
     {
       title: "Iron Man",
@@ -63,6 +71,7 @@ Movie.create!([
       image_file_name: "catwoman.jpg"
     }
   ])
+
 
 Genre.create!(name: "Action")
 Genre.create!(name: "Comedy")
